@@ -1,0 +1,19 @@
+#:kivy 2.2.1
+#:import utils kivy.utils
+
+<MainWidget>:
+    id: my_widget
+    cols:1
+    
+    Image:
+        id: image_viewer
+        source: ""
+
+    FileChooserIconView:
+        id: file_chooser
+        on_selection: on_press: my_widget.selected(file_chooser.selection)
+    
+    Button:
+        text: "Submit"
+        on_press: my_widget.analyze_receipt(file_chooser.selection)
+
