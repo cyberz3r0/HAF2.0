@@ -4,16 +4,18 @@
 <MainWidget>:
     id: my_widget
     cols:1
-    
     Image:
         id: image_viewer
         source: ""
 
-    FileChooserIconView:
+    FileChooserListView:
         id: file_chooser
         on_selection: on_press: my_widget.selected(file_chooser.selection)
     
-    Button:
-        text: "Submit"
-        on_press: my_widget.analyze_receipt(file_chooser.selection)
-
+    FloatLayout:
+        Button:
+            text: "Submit"
+            on_press: my_widget.analyze_receipt(file_chooser.selection)
+            size_hint: .5, .5
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            

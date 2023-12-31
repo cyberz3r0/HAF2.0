@@ -11,7 +11,6 @@ class MainWidget(GridLayout):
         self.ids.image_viewer.source = filename[0]
     def analyze_receipt(self, filename):
         from helper import analyze_photo
-        print(filename[0])
         analyze_photo(filename[0])
         
 class HafApp(App):
