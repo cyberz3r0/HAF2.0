@@ -1,4 +1,5 @@
 def analyze_photo(photo_path):
+    import json
     import requests
     from decouple import config
 
@@ -8,5 +9,11 @@ def analyze_photo(photo_path):
         files = {"document": myfile}
         headers = {"Authorization": config('api_key')}
         response = requests.post(url, files=files, headers=headers)
-        print(response.text)
-        
+        response_dict = json.loads(response.text)
+        response_data = response_dict['document']['inference']['pages'][0]['prediction']
+    return response_data
+    # print(response_data['line_items']) #line_items
+    # print(response_data['total_net']) #subtotal
+    # print(response_data['taxes']) #taxes
+    # print(response_data['total_amount']) #total_amount
+    # print(response_data['tip']) #tip

@@ -1,21 +1,43 @@
 #:kivy 2.2.1
 #:import utils kivy.utils
 
-<MainWidget>:
-    id: my_widget
-    cols:1
-    Image:
-        id: image_viewer
-        source: ""
-
-    FileChooserListView:
-        id: file_chooser
-        on_selection: on_press: my_widget.selected(file_chooser.selection)
+<ReceiptCapture>:
+    name: 'receipt_capture'
     
+    GridLayout:
+        
+        id: my_widget
+        cols:1
+
+        Image:
+            id: image_viewer
+            source: ""
+
+        FileChooserListView:
+            id: file_chooser
+            on_selection: on_press: my_widget.selected(file_chooser.selection)
+        
+        FloatLayout:
+
+            Button:
+                text: "Submit"
+                on_press: my_widget.analyze_receipt(file_chooser.selection)
+                size_hint: .3, .3
+                pos_hint: {'center_x': 0.5, 'center_y': .7}
+            Button:
+                text: "Next"
+                size_hint: .3, .3
+                pos_hint: {'center_x': .5 , 'y': 0 }
+                on_release: app.root.current = "validation_form"
+<ValidationForm>:
+    name: 'validation_form'
+
     FloatLayout:
+        Label:
+            text:'Second Page'
+            pos_hint: {'center_x': .5, 'center_yy': .5}
         Button:
-            text: "Submit"
-            on_press: my_widget.analyze_receipt(file_chooser.selection)
-            size_hint: .5, .5
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            
+            text: "Previous"
+            size_hint: .3, .3
+            pos_hint: {'center_x': .5 , 'y': 0 }
+            on_release: app.root.current = "receipt_capture" 
